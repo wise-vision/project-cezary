@@ -32,14 +32,14 @@ $ west build -b lora_e5_dev_board
 $ west flash
 ## Code of E5 dev board
 ### prj.conf
-'''c
+```c
 CONFIG_LOG=y
 CONFIG_SPI=y
 CONFIG_GPIO=y
 CONFIG_LORA=y
 CONFIG_PRINTK=y
 CONFIG_CBPRINTF_FP_SUPPORT=y
-'''
+```
 These configurations help customize the Zephyr OS for specific hardware and functionality requirements.
 
 
