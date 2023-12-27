@@ -8,20 +8,38 @@ Soil moisture system includes:
 Project is created with:
 * Zephyr: 3.5.0
 * West: 1.2.0
-## E5 dev board setup
+## Preparation
+1. It is necessary to have Zephyr already installed to build or flash application.                                                          
+## E5 dev board setup             
 To build versions for the e5 dev board, you need an unlocked board(this shows how to unlock board https://wisevision.tech/docs/LoRa/LoRa-e5-dev-board-unprotect-memory), connected via UART and st-link.
-1. You need to set the path to the code file:
-$ cd /path_to_your_source_code/e5_dev_board
-2. Build source code:
+1. You need to copy Source code from github into zephyrpoject directory:
+$ git clone https://github.com/wise-vision/project-cezary.git
+2. You need to set the path to the code file:
+$ cd /zephyrpoject/project-cezary/boards/e5_dev_board
+3. Build source code:
 $ west build -b lora_e5_dev_board
-3. Upload your build to board:
+4. Upload your build to board:
 $ west flash
 ## E5 mini board setup
 To build versions for the e5 mini board, you need an unlocked board(this shows how to unlock board https://wisevision.tech/docs/LoRa/LoRa-e5-dev-board-unprotect-memory), connected via UART and st-link.
-1. You need to set the path to the code file:
-$ cd /path_to_your_source_code/e5_mini_board
-2. Build source code:
+1. You need to copy Source code from github into zephyrpoject directory:
+$ git clone https://github.com/wise-vision/project-cezary.git
+2. You need to set the path to the code file:
+$ cd /zephyrpoject/project-cezary/boards/e5_mini
+3. Build source code:
 $ west build -b lora_e5_dev_board
-3. Upload your build to board:
+4. Upload your build to board:
 $ west flash
+## Code of E5 dev board
+### prj.conf
+'''c
+CONFIG_LOG=y
+CONFIG_SPI=y
+CONFIG_GPIO=y
+CONFIG_LORA=y
+CONFIG_PRINTK=y
+CONFIG_CBPRINTF_FP_SUPPORT=y
+'''
+These configurations help customize the Zephyr OS for specific hardware and functionality requirements.
+
 
