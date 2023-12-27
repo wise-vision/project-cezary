@@ -10,13 +10,13 @@
 ### Flashing
 Do every step from Wio E5 dev board and:
 #### Connections
-![Wio E5 mini board pinout](loar-e5_mini_pinout.png) 
+![Wio E5 mini board pinout](lora-e5_mini_pinout.png) 
 ![GROVE moisture capicity sensor pinout](pin_out_moisture_grove.jpg) 
-Moisture sensor connections:
+##### Moisture sensor connections:
 * GND to system GND
 * VCC to 3v3
 * SIG to A3
-RGB led connections:
+##### RGB led connections:
 ![RGB pin out](rgb_pin_out.png) 
 * GND to system GND
 * R to D0
