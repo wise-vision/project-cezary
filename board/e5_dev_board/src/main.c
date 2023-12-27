@@ -1,6 +1,5 @@
 /*
- * Copyright (c) 2021 Nordic Semiconductor ASA
- * SPDX-License-Identifier: Apache-2.0
+ * Copyright (c) WiseVision 2023. All rights reserved.
  */
 
 #include <zephyr/device.h>
@@ -79,8 +78,8 @@ void send_msg(const struct device *dev, uint8_t *data, int16_t rssi, int8_t snr)
 	char data_send[MAX_DATA_LEN] = {0};
 	int ret;
 	LOG_INF("Sending data");
-	int convertedValue = atoi(data);
-	if (convertedValue<30){
+	int converted_value = atoi(data);
+	if (converted_value<30){
 	data_send[0]='1';
 	}else{
 	data_send[0]='0';

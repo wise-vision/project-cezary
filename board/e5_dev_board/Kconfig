@@ -1,10 +1,5 @@
-# Copyright (c) 2021 Nordic Semiconductor ASA
-# SPDX-License-Identifier: Apache-2.0
-#
-# This file is the application Kconfig entry point. All application Kconfig
-# options can be defined here or included via other application Kconfig files.
-# You can browse these options using the west targets menuconfig (terminal) or
-# guiconfig (GUI).
+# Copyright (c) WiseVision 2023. All rights reserved.
+
 
 menu "Zephyr"
 source "Kconfig.zephyr"

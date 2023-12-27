@@ -1,7 +1,7 @@
 /*
- * Copyright (c) 2021 Nordic Semiconductor ASA
- * SPDX-License-Identifier: Apache-2.0
+ * Copyright (c) WiseVision 2023. All rights reserved.
  */
+
 
 #include <inttypes.h>
 #include <stddef.h>
@@ -12,7 +12,6 @@
 #include <zephyr/sys/util.h>
 #include <zephyr/kernel.h>
 #include <zephyr/drivers/adc.h>
-#include <zephyr/sys/printk.h>
 #include <zephyr/drivers/gpio.h>
 #include <app_version.h>
 
@@ -41,12 +40,24 @@ BUILD_ASSERT(DT_NODE_HAS_STATUS(DEFAULT_RADIO_NODE, okay),
 #include <zephyr/logging/log.h>
 LOG_MODULE_REGISTER(lora_send);
 
-int map(int value, int inMin, int inMax, int outMin, int outMax) {
+int mapSoilMoisture(int value, int inMin, int inMax, int outMin, int outMax) {
     return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
 }
 
 int configureRx(const struct device *const lora_dev)
 {
+	/*
+	* Frequncy Plans
+	* Europe: 863-870 Mhz
+	* United States: 902-928 Mhz
+	* Austraulia: 915-928 Mhz
+	* China 470-510 Mhz
+	* Asia/Japan 920-923 Mhz
+	* Morocco 869-870 Mhz
+	* India 865-867 Mhz
+	* Russia 864-870 Mhz
+
+	*/
 	struct lora_modem_config config;
 	config.frequency = 865100000;
 	config.bandwidth = BW_125_KHZ;
@@ -88,15 +99,12 @@ int configureTx(const struct device *const lora_dev)
 
 void send_msg(const struct device *dev, int moisture){
 	int ret;
-	printk("Received moisture value: %d\n", moisture);
+	LOG_INF("Received moisture value: %d\n", moisture);
 	char data[MAX_DATA_LEN];
 	char moisture_str[MAX_DATA_LEN];
 	snprintf(moisture_str, sizeof(moisture_str), "%.2d", moisture);
 	memset(data, 0, sizeof(data));
 	strncpy(data, moisture_str, sizeof(data) - 1);
-	/*for (int i = 0; i < strlen(moisture_str) && i < MAX_DATA_LEN; ++i) {
-	    data[i] = moisture_str[i];
-	}*/
 	configureTx(dev);
 	ret = lora_send(dev, data, MAX_DATA_LEN);
 	if (ret < 0) {
@@ -144,13 +152,13 @@ void adc_config(){
 	int err;
 	for (size_t i = 0U; i < ARRAY_SIZE(adc_channels); i++) {
 		if (!adc_is_ready_dt(&adc_channels[i])) {
-			printk("ADC controller device %s not ready\n", adc_channels[i].dev->name);
+			LOG_INF("ADC controller device %s not ready\n", adc_channels[i].dev->name);
 			return 0;
 		}
 
 		err = adc_channel_setup_dt(&adc_channels[i]);
 		if (err < 0) {
-			printk("Could not setup channel #%d (%d)\n", i, err);
+			LOG_INF("Could not setup channel #%d (%d)\n", i, err);
 			return 0;
 		}
 	}
@@ -180,7 +188,7 @@ int adc_val(){
 		}
 		err = adc_raw_to_millivolts_dt(&adc_channels[i],&val_mv);
 		int val_int = (int)val_mv;
-		moisture = map(val_int, DryValue, WetValue, 0, 100);
+		moisture = mapSoilMoisture(val_int, DryValue, WetValue, 0, 100);
 
 	}
 	return moisture;
@@ -235,4 +243,3 @@ int main(void)
 	}
 	return 0;
 }
-
