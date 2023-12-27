@@ -155,5 +155,190 @@ int main(void)
 ```
 In main function we recev and send messegs form board to bord with 1 second interval.
 
+## Code of mini board
+### boards/lora_e5_dev_board.overlay
+```c
+
+/ {
+	zephyr,user {
+		/* adjust channel number according to pinmux in board.dts */
+		io-channels = <&adc1 2>;
+	};
+};
+
+&adc1 {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	pinctrl-0 = <&adc_in2_pb3>;
+	
+	status = "okay";
+	
+		channel@2 {
+		reg = <2>;
+		zephyr,gain = "ADC_GAIN_1";
+		zephyr,reference = "ADC_REF_INTERNAL";
+		zephyr,acquisition-time = <ADC_ACQ_TIME_DEFAULT>;
+		zephyr,resolution = <12>;
+		};
+};
+```
+This part of device tree defines Analog to Digital converter pins. Channel 2 is used because in E5 mini board it is deafult channel.
+### prj.conf
+```c
+CONFIG_ADC=y
+CONFIG_SHELL=y
+CONFIG_LOG=y
+CONFIG_SPI=y
+CONFIG_GPIO=y
+CONFIG_LORA=y
+```
+It has the same use like in dev board, but its added more configs:
+*ADC for reading values from moisture sensor.
+*GPIO for changeing colour of led.
+### src/main.c
+`configureRx and configureTx`
+This functions are the same as on dev boards. If we want communication between two boards, we have to set the same frequency.
+```c
+const int DryValue = 1950;
+const int WetValue = 1220;
+int mapSoilMoisture(int value, int inMin, int inMax, int outMin, int outMax) {
+    return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+}
+```
+This function is used to translet masurments from ADC to 0-100 values. If we want to have correct values of moisture, we have to make a calibration of the sensor. 
+#### Calibration of the sensor
+*Check the value of dry sensor and write it into DryValue
+*Check the value of the sensor puted in the water and write it into WetValue.
+```c
+void send_msg(const struct device *dev, int moisture){
+	int ret;
+	LOG_INF("Received moisture value: %d\n", moisture);
+	char data[MAX_DATA_LEN];
+	char moisture_str[MAX_DATA_LEN];
+	snprintf(moisture_str, sizeof(moisture_str), "%.2d", moisture);
+	memset(data, 0, sizeof(data));
+	strncpy(data, moisture_str, sizeof(data) - 1);
+	configureTx(dev);
+	ret = lora_send(dev, data, MAX_DATA_LEN);
+	if (ret < 0) {
+		LOG_ERR("LoRa send failed");
+		return 0;
+	}
+
+	LOG_INF("Data sent!");
+
+}
+```
+This function sends data too dev board about soil moisture.
+```c
+void recev_msg(const struct device *dev, uint8_t *data_recive, int16_t rssi, int8_t snr){
+	int len;
+	configureRx(dev);
+	LOG_INF("Recive data");
+	len = lora_recv(dev, data_recive, MAX_DATA_LEN, K_FOREVER, &rssi, &snr);
+	if (len < 0) {
+		LOG_ERR("LoRa receive failed");
+		return 0;
+	}
+
+	LOG_INF("Received data: %s", data_recive);
+}
+```
+This function recevs data from dev board.
+```c
+void gpios_config(const struct device *gpio1, const struct device *gpio2){
+	int ret;
+	ret = gpio_pin_configure(gpio1, 0, GPIO_OUTPUT_ACTIVE);//green
+	if (ret != 0) {
+		return;
+	}
+		ret = gpio_pin_configure(gpio2, 10, GPIO_OUTPUT_ACTIVE);//green
+	if (ret != 0) {
+		return;
+	}
+	if(!device_is_ready(gpio1)){
+		return;
+	}
+	if(!device_is_ready(gpio2)){
+		return;
+	}
+
+
+}
+```
+This function configs gpios outputs for led controling.
+```c
+void adc_config(){
+	int err;
+	for (size_t i = 0U; i < ARRAY_SIZE(adc_channels); i++) {
+		if (!adc_is_ready_dt(&adc_channels[i])) {
+			LOG_INF("ADC controller device %s not ready\n", adc_channels[i].dev->name);
+			return 0;
+		}
+
+		err = adc_channel_setup_dt(&adc_channels[i]);
+		if (err < 0) {
+			LOG_INF("Could not setup channel #%d (%d)\n", i, err);
+			return 0;
+		}
+	}
+}
+```
+This function is used to configs analog to digital converter.
+
+```c
+int adc_val(){
+	uint16_t buf;
+	struct adc_sequence sequence = {
+		.buffer = &buf,
+		.buffer_size = sizeof(buf),
+	};
+	int err;
+	int moisture;
+	for (size_t i = 0U; i < ARRAY_SIZE(adc_channels); i++) {
+		int32_t val_mv;
+		(void)adc_sequence_init_dt(&adc_channels[i], &sequence);
+		err = adc_read_dt(&adc_channels[i], &sequence);
+		if (err < 0) {
+			
+			continue;
+		}
+		if (adc_channels[i].channel_cfg.differential) {
+			val_mv = (int32_t)((int16_t)buf);
+		} else {
+			val_mv = (int32_t)buf;
+		}
+		err = adc_raw_to_millivolts_dt(&adc_channels[i],&val_mv);
+		int val_int = (int)val_mv;
+		moisture = mapSoilMoisture(val_int, DryValue, WetValue, 0, 100);
+
+	}
+	return moisture;
+}
+```
+This function returns values of moisture in range 0-100.
+```c
+void set_led(uint8_t *data_recive, const struct device *gpio1, const struct device *gpio2){
+	int ret;
+	int SetLed = atoi(data_recive);
+	if (SetLed == 1) {
+		
+		ret = gpio_pin_set_raw(gpio2, 10, 0);
+		ret = gpio_pin_set_raw(gpio1, 0, 1);	
+			
+	} else {
+		
+		ret = gpio_pin_configure(gpio1, 5,GPIO_OUTPUT_ACTIVE); //red
+		if (ret != 0) {
+			return;
+		}
+		
+		ret = gpio_pin_set_raw(gpio1, 0, 0);
+		ret = gpio_pin_set_raw(gpio2, 10, 1);
+			
+	} 
+}
+```
+This function sets color of leds depending on the values send from dev board.
 
 
