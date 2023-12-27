@@ -340,5 +340,9 @@ void set_led(uint8_t *data_recive, const struct device *gpio1, const struct devi
 }
 ```
 This function sets color of leds depending on the values send from dev board.
+##How to see logs from boards?
+If you don't have already installed picom you need to install: https://installati.one/install-picom-ubuntu-22-04/
+1. Open terminal
+2. Use command `sudo picocom --baud 115200 /dev/"your_usb_port"`
 
 
