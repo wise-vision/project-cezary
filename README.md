@@ -207,8 +207,8 @@ int mapSoilMoisture(int value, int inMin, int inMax, int outMin, int outMax) {
 ```
 This function is used to translet masurments from ADC to 0-100 values. If we want to have correct values of moisture, we have to make a calibration of the sensor. 
 #### Calibration of the sensor
-*Check the value of dry sensor and write it into DryValue
-*Check the value of the sensor puted in the water and write it into WetValue.
+* Check the value of dry sensor and write it into DryValue
+* Check the value of the sensor puted in the water and write it into WetValue.
 ```c
 void send_msg(const struct device *dev, int moisture){
 	int ret;
