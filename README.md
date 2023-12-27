@@ -13,23 +13,23 @@ Project is created with:
 ## E5 dev board setup             
 To build versions for the e5 dev board, you need an unlocked board(this shows how to unlock board https://wisevision.tech/docs/LoRa/LoRa-e5-dev-board-unprotect-memory), connected via UART and st-link.
 1. You need to copy Source code from github into zephyrpoject directory:
-$ git clone https://github.com/wise-vision/project-cezary.git
+`$ git clone https://github.com/wise-vision/project-cezary.git`
 2. You need to set the path to the code file:
-$ cd /zephyrpoject/project-cezary/boards/e5_dev_board
+`$ cd /zephyrpoject/project-cezary/boards/e5_dev_board`
 3. Build source code:
-$ west build -b lora_e5_dev_board
+`$ west build -b lora_e5_dev_board`
 4. Upload your build to board:
-$ west flash
+`$ west flash`
 ## E5 mini board setup
 To build versions for the e5 mini board, you need an unlocked board(this shows how to unlock board https://wisevision.tech/docs/LoRa/LoRa-e5-dev-board-unprotect-memory), connected via UART and st-link.
 1. You need to copy Source code from github into zephyrpoject directory:
-$ git clone https://github.com/wise-vision/project-cezary.git
+`$ git clone https://github.com/wise-vision/project-cezary.git`
 2. You need to set the path to the code file:
-$ cd /zephyrpoject/project-cezary/boards/e5_mini
+`$ cd /zephyrpoject/project-cezary/boards/e5_mini`
 3. Build source code:
-$ west build -b lora_e5_dev_board
+`$ west build -b lora_e5_dev_board`
 4. Upload your build to board:
-$ west flash
+`$ west flash`
 ## Code of E5 dev board
 ### prj.conf
 ```c
