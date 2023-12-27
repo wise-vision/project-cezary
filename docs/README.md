@@ -3,4 +3,4 @@
 ### Flashing
 * For flashing the board you have to unlock board like here (https://wisevision.tech/docs/LoRa/LoRa-e5-dev-board-unprotect-memory)
 * After this operation st-link should be still connected to your pc and board
-![Connection diagram](./docs/st-link) 
+![Connection diagram](./docs/st-link.png) 
