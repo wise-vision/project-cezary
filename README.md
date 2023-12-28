@@ -1,5 +1,6 @@
 # Soil moisture system using grove capicty moisture sensor, Wio E5 dev board and Wio E5 mini board
 ## Introduction
+![System schema](./docs/asset/project_cezary_1.drawio.png)
 Soil moisture system includes:
 * Reading soil mositure level via ADC on mini board.
 * Sending data about mositure level via Lora to dev board.
@@ -13,22 +14,24 @@ Project is created with:
 ## E5 dev board setup             
 To build versions for the e5 dev board, you need an unlocked board(this shows how to unlock board https://wisevision.tech/docs/LoRa/LoRa-e5-dev-board-unprotect-memory), connected via UART and st-link.
 1. You need to copy Source code from github into zephyrpoject directory:
+`$ cd /zephyrpoject`
 `$ git clone https://github.com/wise-vision/project-cezary.git`
-2. You need to set the path to the code file:
+3. You need to set the path to the code file:
 `$ cd /zephyrpoject/project-cezary/boards/e5_dev_board`
-3. Build source code:
+4. Build source code:
 `$ west build -b lora_e5_dev_board`
-4. Upload your build to board:
+5. Upload your build to board:
 `$ west flash`
 ## E5 mini board setup
 To build versions for the e5 mini board, you need an unlocked board(this shows how to unlock board https://wisevision.tech/docs/LoRa/LoRa-e5-dev-board-unprotect-memory), connected via UART and st-link.
 1. You need to copy Source code from github into zephyrpoject directory:
+`$ cd /zephyrpoject`
 `$ git clone https://github.com/wise-vision/project-cezary.git`
-2. You need to set the path to the code file:
+3. You need to set the path to the code file:
 `$ cd /zephyrpoject/project-cezary/boards/e5_mini`
-3. Build source code:
+4. Build source code:
 `$ west build -b lora_e5_dev_board`
-4. Upload your build to board:
+5. Upload your build to board:
 `$ west flash`
 ## Code of E5 dev board
 ### prj.conf
