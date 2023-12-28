@@ -29,31 +29,53 @@ sudo apt-get install ninja-build
 ## E5 dev board setup             
 To build versions for the e5 dev board, you need an unlocked board(this shows how to unlock board https://wisevision.tech/docs/LoRa/LoRa-e5-dev-board-unprotect-memory), connected via UART and st-link.
 1. You need to copy Source code from github into zephyrpoject directory:
-`$ cd /zephyrpoject`
-`$ git clone https://github.com/wise-vision/project-cezary.git`
-3. You need to set the path to the code file:
-`$ cd /zephyrpoject/project-cezary/boards/e5_dev_board`
-4. Build source code:
-`$ west build -b lora_e5_dev_board`
+```
+$ cd /zephyrpoject
+$ git clone https://github.com/wise-vision/project-cezary.git
+```
+2. You need to set the path to the code file:
+```
+$ cd /zephyrpoject/project-cezary/boards/e5_dev_board
+```
+3. Build source code:
+```
+$ west build -b lora_e5_dev_board
+```
 Successful build should looks like this:
 ![Successful build](./docs/correct_build.png)
-5. Upload your build to board:
-`$ west flash`
+4. Upload your build to board:
+```
+$ west flash
+```
 Successful flash should looks like this:
 ![Successful flash](./docs/asset/correct_flash.png)
-6. After build and flash to board, to run the app you have to press the reset button on board.
+5. After build and flash to the board, to run the app you have to press the reset button on board.
 ![Wio E5 dev board reset button](./docs/asset/reset_dev_board.png)
 ## E5 mini board setup
 To build versions for the e5 mini board, you need an unlocked board(this shows how to unlock board https://wisevision.tech/docs/LoRa/LoRa-e5-dev-board-unprotect-memory), connected via UART and st-link.
 1. You need to copy Source code from github into zephyrpoject directory:
-`$ cd /zephyrpoject`
-`$ git clone https://github.com/wise-vision/project-cezary.git`
+```
+$ cd /zephyrpoject
+$ git clone https://github.com/wise-vision/project-cezary.git
+```
 2. You need to set the path to the code file:
-`$ cd /zephyrpoject/project-cezary/boards/e5_mini`
+```
+$ cd /zephyrpoject/project-cezary/boards/e5_mini
+```
 3. Build source code:
-`$ west build -b lora_e5_dev_board`
+```
+$ west build -b lora_e5_dev_board
+```
+Successful build should looks like this:
+![Successful build](./docs/correct_build.png)
 4. Upload your build to board:
-`$ west flash`
+```
+$ west flash
+```
+Successful flash should looks like this:
+![Successful flash](./docs/asset/correct_flash.png)
+5. After build and flash to the board, to run the app you have to press the reset button on board.
+![Wio E5 mni board reset button](./docs/asset/reset_mini_board.png)
 ## Code of E5 dev board
 ### prj.conf
 ```c
