@@ -41,6 +41,8 @@ Successful build should looks like this:
 `$ west flash`
 Successful flash should looks like this:
 ![Successful flash](./docs/asset/correct_flash.png)
+6. After build and flash to board, to run the app you have to press the reset button on board.
+![Wio E5 dev board reset button](./docs/asset/reset_dev_board.png)
 ## E5 mini board setup
 To build versions for the e5 mini board, you need an unlocked board(this shows how to unlock board https://wisevision.tech/docs/LoRa/LoRa-e5-dev-board-unprotect-memory), connected via UART and st-link.
 1. You need to copy Source code from github into zephyrpoject directory:
