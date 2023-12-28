@@ -396,12 +396,20 @@ If you flashed your board with built programms you can check their logs.
 To see logs
 1. Open terminal
 2. Use command `sudo picocom --baud 115200 /dev/"your_usb_port"`
-* On Wio E5 dev board kit logs should looks like this:
+### On Wio E5 dev board kit logs should looks like this:
 ![Wio E5 dev board logs](./docs/asset/logs_dev_board.png)
-Recive data informs us that data has been recived
-Recived data shows value of moisture
-Sending data infroms us that data has been sended
-Data send shows value that has been send: 1 means you need too water the plant and 0 means that your soil moisture is correct
+* Recive data informs us that data has been recived
+* Recived data shows value of moisture
+* Sending data infroms us that data has been sended
+* Data send shows value that has been send: 1 means you need too water the plant and 0 means that your soil moisture is correct
+* Blinking led on board informs us that there is connection via uart.
+* ### On Wio E5 mini board logs should looks like this:
+![Wio E5 dev board logs](./docs/asset/logs_mini_board.png)
+* Data send! infroms us that data has been sended
+* Recive data informs us that data has been recived
+* Recive data shows value sended from dev board: 1 means you need too water the plant and 0 means that your soil moisture is correct
+* Send moisture data shows value of moisture
+* Blinking led on board informs us that there is connection via uart.
 
 
 
