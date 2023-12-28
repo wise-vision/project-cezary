@@ -403,7 +403,7 @@ To see logs
 * Sending data infroms us that data has been sended
 * Data send shows value that has been send: 1 means you need too water the plant and 0 means that your soil moisture is correct
 * Blinking led on board informs us that there is connection via uart.
-* ### On Wio E5 mini board logs should looks like this:
+### On Wio E5 mini board logs should looks like this:
 ![Wio E5 dev board logs](./docs/asset/logs_mini_board.png)
 * Data send! infroms us that data has been sended
 * Recive data informs us that data has been recived
