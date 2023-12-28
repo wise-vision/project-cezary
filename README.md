@@ -10,7 +10,22 @@ Project is created with:
 * Zephyr: 3.5.0
 * West: 1.2.0
 ## Preparation
-1. It is necessary to have Zephyr already installed to build or flash application.                                                          
+1. It is necessary to have Zephyr already installed to build or flash application.
+   * Go to the official Zephyr RTOS website (https://www.zephyrproject.org/) to download the latest version.
+   * Follow the installation instructions on the website to install Zephyr RTOS on your system.
+2. Install Build Tools:
+* Zephyr RTOS uses build tools like CMake and ninja. You have to follow this commmands to install:
+* CMake:
+```
+sudo apt-get update
+sudo apt-get install cmake
+```
+* Ninja:
+```
+sudo apt-get update
+sudo apt-get install ninja-build
+```
+                                                         
 ## E5 dev board setup             
 To build versions for the e5 dev board, you need an unlocked board(this shows how to unlock board https://wisevision.tech/docs/LoRa/LoRa-e5-dev-board-unprotect-memory), connected via UART and st-link.
 1. You need to copy Source code from github into zephyrpoject directory:
@@ -20,18 +35,22 @@ To build versions for the e5 dev board, you need an unlocked board(this shows ho
 `$ cd /zephyrpoject/project-cezary/boards/e5_dev_board`
 4. Build source code:
 `$ west build -b lora_e5_dev_board`
+Successful build should looks like this:
+![Successful build](./docs/correct_build.png)
 5. Upload your build to board:
 `$ west flash`
+Successful flash should looks like this:
+![Successful flash](./docs/asset/correct_flash.png)
 ## E5 mini board setup
 To build versions for the e5 mini board, you need an unlocked board(this shows how to unlock board https://wisevision.tech/docs/LoRa/LoRa-e5-dev-board-unprotect-memory), connected via UART and st-link.
 1. You need to copy Source code from github into zephyrpoject directory:
 `$ cd /zephyrpoject`
 `$ git clone https://github.com/wise-vision/project-cezary.git`
-3. You need to set the path to the code file:
+2. You need to set the path to the code file:
 `$ cd /zephyrpoject/project-cezary/boards/e5_mini`
-4. Build source code:
+3. Build source code:
 `$ west build -b lora_e5_dev_board`
-5. Upload your build to board:
+4. Upload your build to board:
 `$ west flash`
 ## Code of E5 dev board
 ### prj.conf
