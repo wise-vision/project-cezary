@@ -25,27 +25,32 @@ sudo apt-get install cmake
 sudo apt-get update
 sudo apt-get install ninja-build
 ```
-                                                         
+3. Install picom
+* To communicate with your board you have to install picom:
+```
+sudo apt-get update
+sudo apt-get -y install picom
+```                                                         
 ## E5 dev board setup             
 To build versions for the e5 dev board, you need an unlocked board(this shows how to unlock board https://wisevision.tech/docs/LoRa/LoRa-e5-dev-board-unprotect-memory), connected via UART and st-link.
 1. You need to copy Source code from github into zephyrpoject directory:
 ```
-$ cd /zephyrpoject
-$ git clone https://github.com/wise-vision/project-cezary.git
+cd /zephyrpoject
+git clone https://github.com/wise-vision/project-cezary.git
 ```
 2. You need to set the path to the code file:
 ```
-$ cd /zephyrpoject/project-cezary/boards/e5_dev_board
+cd /zephyrpoject/project-cezary/boards/e5_dev_board
 ```
 3. Build source code:
 ```
-$ west build -b lora_e5_dev_board
+west build -b lora_e5_dev_board
 ```
 Successful build should looks like this:
 ![Successful build](./docs/correct_build.png)
 4. Upload your build to board:
 ```
-$ west flash
+west flash
 ```
 Successful flash should looks like this:
 ![Successful flash](./docs/asset/correct_flash.png)
@@ -55,22 +60,22 @@ Successful flash should looks like this:
 To build versions for the e5 mini board, you need an unlocked board(this shows how to unlock board https://wisevision.tech/docs/LoRa/LoRa-e5-dev-board-unprotect-memory), connected via UART and st-link.
 1. You need to copy Source code from github into zephyrpoject directory:
 ```
-$ cd /zephyrpoject
-$ git clone https://github.com/wise-vision/project-cezary.git
+cd /zephyrpoject
+git clone https://github.com/wise-vision/project-cezary.git
 ```
 2. You need to set the path to the code file:
 ```
-$ cd /zephyrpoject/project-cezary/boards/e5_mini
+cd /zephyrpoject/project-cezary/boards/e5_mini
 ```
 3. Build source code:
 ```
-$ west build -b lora_e5_dev_board
+west build -b lora_e5_dev_board
 ```
 Successful build should looks like this:
 ![Successful build](./docs/correct_build.png)
 4. Upload your build to board:
 ```
-$ west flash
+west flash
 ```
 Successful flash should looks like this:
 ![Successful flash](./docs/asset/correct_flash.png)
@@ -386,9 +391,17 @@ void set_led(uint8_t *data_recive, const struct device *gpio1, const struct devi
 }
 ```
 This function sets color of leds depending on the values send from dev board.
-##How to see logs from boards?
-If you don't have already installed picom you need to install: https://installati.one/install-picom-ubuntu-22-04/
+## Finishing
+If you flashed your board with built programms you can check their logs.
+To see logs
 1. Open terminal
 2. Use command `sudo picocom --baud 115200 /dev/"your_usb_port"`
+* On Wio E5 dev board kit logs should looks like this:
+![Wio E5 dev board logs](./docs/asset/logs_dev_board.png)
+Recive data informs us that data has been recived
+Recived data shows value of moisture
+Sending data infroms us that data has been sended
+Data send shows value that has been send: 1 means you need too water the plant and 0 means that your soil moisture is correct
+
 
 
