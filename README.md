@@ -410,6 +410,14 @@ To see logs
 * Recive data shows value sended from dev board: 1 means you need too water the plant and 0 means that your soil moisture is correct
 * Send moisture data shows value of moisture
 * Blinking led on board informs us that there is connection via uart.
-
-
+## Use case
+If we have evertyhing already set, we have to put our soil moisture sensor in our plant:
+![Sensor in plant](./docs/asset/sensor_in_plant.jpg)
+On our sensor there is a white straight line, wich shows how deep we have to put our sensor in soil.
+### Correct soil moisture
+If our soil moisture is correct so it means that soil moisture is higher than 30% and rgb led lights green:
+![Green light](./docs/asset/green_light.jpg)
+### Incorrect soil moisture
+If our soil moisture is not correct so it means that soil moisture is lower than 30% and rgb led lights red:
+![Red](./docs/asset/red_light.jpg)
 

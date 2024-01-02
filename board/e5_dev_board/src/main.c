@@ -81,6 +81,8 @@ void send_msg(const struct device *dev, uint8_t *data, int16_t rssi, int8_t snr)
 	int converted_value = atoi(data);
 	if (converted_value<30){
 	data_send[0]='1';
+	}else if (converted_value>80){
+	data_send[0]='2';
 	}else{
 	data_send[0]='0';
 	}

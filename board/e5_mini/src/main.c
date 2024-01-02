@@ -99,7 +99,7 @@ int configureTx(const struct device *const lora_dev)
 
 void send_msg(const struct device *dev, int moisture){
 	int ret;
-	LOG_INF("Received moisture value: %d\n", moisture);
+	LOG_INF("Send moisture value: %d\n", moisture);
 	char data[MAX_DATA_LEN];
 	char moisture_str[MAX_DATA_LEN];
 	snprintf(moisture_str, sizeof(moisture_str), "%.2d", moisture);
@@ -130,14 +130,15 @@ void recev_msg(const struct device *dev, uint8_t *data_recive, int16_t rssi, int
 
 void gpios_config(const struct device *gpio1, const struct device *gpio2){
 	int ret;
-	ret = gpio_pin_configure(gpio1, 0, GPIO_OUTPUT_ACTIVE);//green
+	ret = gpio_pin_configure(gpio1, 0, GPIO_OUTPUT_INACTIVE);//green
 	if (ret != 0) {
 		return;
 	}
-		ret = gpio_pin_configure(gpio2, 10, GPIO_OUTPUT_ACTIVE);//green
+		ret = gpio_pin_configure(gpio2, 10, GPIO_OUTPUT_INACTIVE);//green
 	if (ret != 0) {
 		return;
 	}
+
 	if(!device_is_ready(gpio1)){
 		return;
 	}
@@ -163,8 +164,8 @@ void adc_config(){
 		}
 	}
 }
-const int DryValue = 1950;
-const int WetValue = 1220;
+#define ValueDry 1950
+#define ValueWet 1220
 int adc_val(){
 	uint16_t buf;
 	struct adc_sequence sequence = {
@@ -188,7 +189,7 @@ int adc_val(){
 		}
 		err = adc_raw_to_millivolts_dt(&adc_channels[i],&val_mv);
 		int val_int = (int)val_mv;
-		moisture = mapSoilMoisture(val_int, DryValue, WetValue, 0, 100);
+		moisture = mapSoilMoisture(val_int, ValueDry, ValueWet, 0, 100);
 
 	}
 	return moisture;
@@ -198,21 +199,18 @@ void set_led(uint8_t *data_recive, const struct device *gpio1, const struct devi
 	int ret;
 	int SetLed = atoi(data_recive);
 	if (SetLed == 1) {
-		
 		ret = gpio_pin_set_raw(gpio2, 10, 0);
 		ret = gpio_pin_set_raw(gpio1, 0, 1);	
 			
 	} else {
-		
 		ret = gpio_pin_configure(gpio1, 5,GPIO_OUTPUT_ACTIVE); //red
 		if (ret != 0) {
 			return;
 		}
-		
 		ret = gpio_pin_set_raw(gpio1, 0, 0);
 		ret = gpio_pin_set_raw(gpio2, 10, 1);
 			
-	} 
+	}
 }
 static const struct device *gpio_ct_dev = DEVICE_DT_GET(DT_NODELABEL(gpioa));
 static const struct device *gpio_ct_dev_2 = DEVICE_DT_GET(DT_NODELABEL(gpiob));

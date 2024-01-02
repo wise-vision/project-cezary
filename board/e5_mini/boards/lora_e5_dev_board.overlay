@@ -1,5 +1,6 @@
-# Copyright (c) WiseVision 2023. All rights reserved.
-
+/*
+ *Copyright (c) WiseVision 2023. All rights reserved.
+*/
 
 / {
 	zephyr,user {
