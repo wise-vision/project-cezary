@@ -97,7 +97,7 @@ int configureTx(const struct device *const lora_dev)
 	return ret;
 }
 
-void send_msg(const struct device *dev, int moisture){
+void sendMsg(const struct device *dev, int moisture){
 	int ret;
 	LOG_INF("Send moisture value: %d\n", moisture);
 	char data[MAX_DATA_LEN];
@@ -115,7 +115,7 @@ void send_msg(const struct device *dev, int moisture){
 	LOG_INF("Data sent!");
 
 }
-void recev_msg(const struct device *dev, uint8_t *data_recive, int16_t rssi, int8_t snr){
+void recevMsg(const struct device *dev, uint8_t *data_recive, int16_t rssi, int8_t snr){
 	int len;
 	configureRx(dev);
 	LOG_INF("Recive data");
@@ -128,7 +128,7 @@ void recev_msg(const struct device *dev, uint8_t *data_recive, int16_t rssi, int
 	LOG_INF("Received data: %s", data_recive);
 }
 
-void gpios_config(const struct device *gpio1, const struct device *gpio2){
+void gpiosConfig(const struct device *gpio1, const struct device *gpio2){
 	int ret;
 	ret = gpio_pin_configure(gpio1, 0, GPIO_OUTPUT_INACTIVE);//green
 	if (ret != 0) {
@@ -149,7 +149,7 @@ void gpios_config(const struct device *gpio1, const struct device *gpio2){
 
 }
 
-void adc_config(){
+void adcConfig(){
 	int err;
 	for (size_t i = 0U; i < ARRAY_SIZE(adc_channels); i++) {
 		if (!adc_is_ready_dt(&adc_channels[i])) {
@@ -166,7 +166,7 @@ void adc_config(){
 }
 #define ValueDry 1950
 #define ValueWet 1220
-int adc_val(){
+int adcVal(){
 	uint16_t buf;
 	struct adc_sequence sequence = {
 		.buffer = &buf,
@@ -195,7 +195,7 @@ int adc_val(){
 	return moisture;
 }
 
-void set_led(uint8_t *data_recive, const struct device *gpio1, const struct device *gpio2){
+void setLeds(uint8_t *data_recive, const struct device *gpio1, const struct device *gpio2){
 	int ret;
 	int SetLed = atoi(data_recive);
 	if (SetLed == 1) {
@@ -228,14 +228,14 @@ int main(void)
 		return 0;
 	}
 
-	gpios_config(gpio_ct_dev,  gpio_ct_dev_2);
-	adc_config();
+	gpiosConfig(gpio_ct_dev,  gpio_ct_dev_2);
+	adcConfig();
 
 	while (1) {
 
-		send_msg(lora_dev, adc_val());
-		recev_msg(lora_dev,data_recive, rssi, snr);
-		set_led(data_recive, gpio_ct_dev,  gpio_ct_dev_2);
+		sendMsg(lora_dev, adcVal());
+		recevMsg(lora_dev,data_recive, rssi, snr);
+		setLeds(data_recive, gpio_ct_dev,  gpio_ct_dev_2);
 
 		k_sleep(K_MSEC(1000));
 	}

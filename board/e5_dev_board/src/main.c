@@ -61,7 +61,7 @@ int configureTx(const struct device *const lora_dev)
 	return ret;
 }
 
-void recev_msg(const struct device *dev, uint8_t *data, int16_t rssi, int8_t snr){
+void recevMsg(const struct device *dev, uint8_t *data, int16_t rssi, int8_t snr){
 	int len;
 	configureRx(dev);
 	LOG_INF("Recive data");
@@ -74,7 +74,7 @@ void recev_msg(const struct device *dev, uint8_t *data, int16_t rssi, int8_t snr
 	LOG_INF("Received data: %s (RSSI:%ddBm, SNR:%ddBm)", data, rssi, snr);
 }
 
-void send_msg(const struct device *dev, uint8_t *data, int16_t rssi, int8_t snr){
+void sendMsg(const struct device *dev, uint8_t *data, int16_t rssi, int8_t snr){
 	char data_send[MAX_DATA_LEN] = {0};
 	int ret;
 	LOG_INF("Sending data");
@@ -108,8 +108,8 @@ int main(void)
 		return 0;
 	}
 	while(1){
-		recev_msg(lora_dev, data, rssi, snr);
-		send_msg(lora_dev, data, rssi, snr);
+		recevMsg(lora_dev, data, rssi, snr);
+		sendMsg(lora_dev, data, rssi, snr);
 		k_sleep(K_MSEC(1000));
 	}
 	k_sleep(K_FOREVER);

@@ -1,44 +1,47 @@
 # Soil moisture system using grove capicty moisture sensor, Wio E5 dev board and Wio E5 mini board
+
 ## Introduction
 ![System schema](./docs/asset/project_cezary_1.drawio.png)
+
+The system consists of the following hardware: 
+* Wio-E5 Development Kit: https://wiki.seeedstudio.com/LoRa_E5_Dev_Board/
+* Wio-E5 Mini: https://wiki.seeedstudio.com/LoRa_E5_mini/
+* Grove - Capacitive Moisture Sensor (Corrosion Resistant): https://wiki.seeedstudio.com/Grove-Capacitive_Moisture_Sensor-Corrosion-Resistant/
+* RGB led
 Soil moisture system includes:
 * Reading soil mositure level via ADC on mini board.
-* Sending data about mositure level via Lora to dev board.
-* Dev board recive this data and send order to mini board about, what color rgb led, should lights.
+* Sending data about mositure level via LoRa to dev board.
+* Receiving this data and sending instuctions to mini board about, what color rgb led, should light up.
+
 ## Technologies
 Project is created with:
 * Zephyr: 3.5.0
 * West: 1.2.0
-## Preparation
+
+## Prerequisites
 1. It is necessary to have Zephyr already installed to build or flash application.
-   * Go to the official Zephyr RTOS website (https://www.zephyrproject.org/) to download the latest version.
-   * Follow the installation instructions on the website to install Zephyr RTOS on your system.
+   * Go to the official Zephyr RTOS website (https://docs.zephyrproject.org/latest/develop/getting_started/index.html) to download the latest version.
 2. Install Build Tools:
-* Zephyr RTOS uses build tools like CMake and ninja. You have to follow this commmands to install:
-* CMake:
+* Zephyr RTOS uses build tools like CMake and Ninja. Use following commands to install both:
 ```
 sudo apt-get update
 sudo apt-get install cmake
-```
-* Ninja:
-```
-sudo apt-get update
 sudo apt-get install ninja-build
 ```
 3. Install picom
 * To communicate with your board you have to install picom:
 ```
-sudo apt-get update
 sudo apt-get -y install picom
-```                                                         
+```        
+
 ## E5 dev board setup             
-To build versions for the e5 dev board, you need an unlocked board(this shows how to unlock board https://wisevision.tech/docs/LoRa/LoRa-e5-dev-board-unprotect-memory), connected via UART and st-link.
-1. You need to copy Source code from github into zephyrpoject directory:
+To build version for the e5 dev board, you need an unlocked board, (this shows how to unlock board https://wisevision.tech/docs/LoRa/LoRa-e5-dev-board-unprotect-memory) connected via UART and st-link.
+1. Copy Source code from github into zephyrpoject directory:
 ```
 cd /zephyrpoject
 git clone https://github.com/wise-vision/project-cezary.git
 ```
-2. You need to set the path to the code file:
+2. Navigate to the build directory::
 ```
 cd /zephyrpoject/project-cezary/boards/e5_dev_board
 ```
@@ -46,24 +49,25 @@ cd /zephyrpoject/project-cezary/boards/e5_dev_board
 ```
 west build -b lora_e5_dev_board
 ```
-Successful build should looks like this:
-![Successful build](./docs/correct_build.png)
+Build is successful when all of the build jobs are finished. To test, upload the build to the board.
 4. Upload your build to board:
+
+To flash your board you hace to connect board via usb to computer for power and via st-link for flashing.
 ```
 west flash
 ```
-Successful flash should looks like this:
-![Successful flash](./docs/asset/correct_flash.png)
-5. After build and flash to the board, to run the app you have to press the reset button on board.
+Flash is successful when all of the flasj jobs are finished.
+5. After build and flash to the board, to run the app press the reset button on board.
 ![Wio E5 dev board reset button](./docs/asset/reset_dev_board.png)
+
 ## E5 mini board setup
 To build versions for the e5 mini board, you need an unlocked board(this shows how to unlock board https://wisevision.tech/docs/LoRa/LoRa-e5-dev-board-unprotect-memory), connected via UART and st-link.
-1. You need to copy Source code from github into zephyrpoject directory:
+1. Copy Source code from github into zephyrpoject directory:
 ```
 cd /zephyrpoject
 git clone https://github.com/wise-vision/project-cezary.git
 ```
-2. You need to set the path to the code file:
+2. Navigate to the build directory::
 ```
 cd /zephyrpoject/project-cezary/boards/e5_mini
 ```
@@ -71,18 +75,22 @@ cd /zephyrpoject/project-cezary/boards/e5_mini
 ```
 west build -b lora_e5_dev_board
 ```
-Successful build should looks like this:
-![Successful build](./docs/correct_build.png)
+Build is successful when all of the build jobs are finished. To test, upload the build to the board.
 4. Upload your build to board:
+
+To flash your board you hace to connect board via usb to computer for power and via st-link for flashing.
 ```
 west flash
 ```
-Successful flash should looks like this:
-![Successful flash](./docs/asset/correct_flash.png)
-5. After build and flash to the board, to run the app you have to press the reset button on board.
+Flash is successful when all of the flasj jobs are finished.
+
+5. After build and flash to the board, to run the app press the reset button on board.
+
 ![Wio E5 mni board reset button](./docs/asset/reset_mini_board.png)
+
 ## Code of E5 dev board
 ### prj.conf
+These configurations help customize the Zephyr OS for specific hardware and functionality requirements.
 ```c
 CONFIG_LOG=y
 CONFIG_SPI=y
@@ -90,8 +98,8 @@ CONFIG_GPIO=y
 CONFIG_LORA=y
 CONFIG_CBPRINTF_FP_SUPPORT=y
 ```
-These configurations help customize the Zephyr OS for specific hardware and functionality requirements.
 ### src/main.c
+This function is for configuarting reception.
 ```c
 int configureRx(const struct device *const lora_dev)
 {
@@ -113,7 +121,7 @@ int configureRx(const struct device *const lora_dev)
 	return ret;
 }
 ```
-This function is for configuarting reception. Lora newtork has few things to confing, but we have only to choose the frequnecy. Frequnecy is diffrent for diffrent regions.
+ LoRa newtork has few things to confing, but we have only to choose the frequnecy. Frequnecy is diffrent for diffrent regions.
 Freuqency plans:
 * Europe: 863-870 Mhz
 * United States: 902-928 Mhz
@@ -123,6 +131,8 @@ Freuqency plans:
 * Morocco 869-870 Mhz
 * India 865-867 Mhz
 * Russia 864-870 Mhz
+
+This function is for configuarting transmission. Like in previous function we have to choose to correct frequnecy.
 
 ```c
 int configureTx(const struct device *const lora_dev)
@@ -145,9 +155,9 @@ int configureTx(const struct device *const lora_dev)
 	return ret;
 }
 ```
-This function is for configuarting transmission. Like in previous function we have to choose to correct frequnecy.
+This function reciving data from min board and shows info about moisture in `LOG_INF`
 ```c
-void recev_msg(const struct device *dev, uint8_t *data, int16_t rssi, int8_t snr){
+void recevMsg(const struct device *dev, uint8_t *data, int16_t rssi, int8_t snr){
 	int len;
 	configureRx(dev);
 	LOG_INF("Recive data");
@@ -160,9 +170,9 @@ void recev_msg(const struct device *dev, uint8_t *data, int16_t rssi, int8_t snr
 	LOG_INF("Received data: %s (RSSI:%ddBm, SNR:%ddBm)", data, rssi, snr);
 }
 ```
-This function reciving data from min board and shows info about moisture in `LOG_INF`
+This function send data 0 if the soil moisture is accurate and 1 if our plant needs water.
 ```c
-void send_msg(const struct device *dev, uint8_t *data, int16_t rssi, int8_t snr){
+void sendMsg(const struct device *dev, uint8_t *data, int16_t rssi, int8_t snr){
 	char data_send[MAX_DATA_LEN] = {0};
 	int ret;
 	LOG_INF("Sending data");
@@ -182,7 +192,9 @@ void send_msg(const struct device *dev, uint8_t *data, int16_t rssi, int8_t snr)
 
 }
 ```
-This function send data 0 if the soil moisture is accurate and 1 if our plant needs water. The correct level of moisture is set for under 30 %. It could be change for your purpose.
+ The correct level of moisture is set for under 30 %. It could be change for your purpose.
+
+ In main function we recev and send messegs form board to bord with 1 second interval.
 ```c
 int main(void)
 {
@@ -196,18 +208,18 @@ int main(void)
 		return 0;
 	}
 	while(1){
-		recev_msg(lora_dev, data, rssi, snr);
-		send_msg(lora_dev, data, rssi, snr);
+		recevMsg(lora_dev, data, rssi, snr);
+		sendMsg(lora_dev, data, rssi, snr);
 		k_sleep(K_MSEC(1000));
 	}
 	k_sleep(K_FOREVER);
 	return 0;
 }
 ```
-In main function we recev and send messegs form board to bord with 1 second interval.
 
 ## Code of mini board
 ### boards/lora_e5_dev_board.overlay
+This part of device tree defines Analog to Digital converter pins. 
 ```c
 
 / {
@@ -233,8 +245,11 @@ In main function we recev and send messegs form board to bord with 1 second inte
 		};
 };
 ```
-This part of device tree defines Analog to Digital converter pins. Channel 2 is used because in E5 mini board it is deafult channel.
+Channel 2 is used because in E5 mini board it is deafult channel.
 ### prj.conf
+It has the same use like in dev board, but its added more configs:
+*ADC for reading values from moisture sensor.
+*GPIO for changeing colour of led.
 ```c
 CONFIG_ADC=y
 CONFIG_SHELL=y
@@ -243,12 +258,12 @@ CONFIG_SPI=y
 CONFIG_GPIO=y
 CONFIG_LORA=y
 ```
-It has the same use like in dev board, but its added more configs:
-*ADC for reading values from moisture sensor.
-*GPIO for changeing colour of led.
 ### src/main.c
 `configureRx and configureTx`
+
 This functions are the same as on dev boards. If we want communication between two boards, we have to set the same frequency.
+
+This function is used to translet masurments from ADC to 0-100 values.
 ```c
 const int DryValue = 1950;
 const int WetValue = 1220;
@@ -256,12 +271,15 @@ int mapSoilMoisture(int value, int inMin, int inMax, int outMin, int outMax) {
     return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
 }
 ```
-This function is used to translet masurments from ADC to 0-100 values. If we want to have correct values of moisture, we have to make a calibration of the sensor. 
+ If we want to have correct values of moisture, we have to make a calibration of the sensor. 
+
 #### Calibration of the sensor
 * Check the value of dry sensor and write it into DryValue
 * Check the value of the sensor puted in the water and write it into WetValue.
+
+This function sends data too dev board about soil moisture.
 ```c
-void send_msg(const struct device *dev, int moisture){
+void sendMsg(const struct device *dev, int moisture){
 	int ret;
 	LOG_INF("Received moisture value: %d\n", moisture);
 	char data[MAX_DATA_LEN];
@@ -280,9 +298,9 @@ void send_msg(const struct device *dev, int moisture){
 
 }
 ```
-This function sends data too dev board about soil moisture.
+This function recevs data from dev board.
 ```c
-void recev_msg(const struct device *dev, uint8_t *data_recive, int16_t rssi, int8_t snr){
+void recevMsg(const struct device *dev, uint8_t *data_recive, int16_t rssi, int8_t snr){
 	int len;
 	configureRx(dev);
 	LOG_INF("Recive data");
@@ -295,9 +313,9 @@ void recev_msg(const struct device *dev, uint8_t *data_recive, int16_t rssi, int
 	LOG_INF("Received data: %s", data_recive);
 }
 ```
-This function recevs data from dev board.
+This function configs gpios outputs for led controling.
 ```c
-void gpios_config(const struct device *gpio1, const struct device *gpio2){
+void gpiosConfig(const struct device *gpio1, const struct device *gpio2){
 	int ret;
 	ret = gpio_pin_configure(gpio1, 0, GPIO_OUTPUT_ACTIVE);//green
 	if (ret != 0) {
@@ -317,9 +335,9 @@ void gpios_config(const struct device *gpio1, const struct device *gpio2){
 
 }
 ```
-This function configs gpios outputs for led controling.
+This function is used to configure analog to digital converter.
 ```c
-void adc_config(){
+void adcConfig(){
 	int err;
 	for (size_t i = 0U; i < ARRAY_SIZE(adc_channels); i++) {
 		if (!adc_is_ready_dt(&adc_channels[i])) {
@@ -335,10 +353,10 @@ void adc_config(){
 	}
 }
 ```
-This function is used to configs analog to digital converter.
+This function returns values of moisture in range 0-100.
 
 ```c
-int adc_val(){
+int adcVal(){
 	uint16_t buf;
 	struct adc_sequence sequence = {
 		.buffer = &buf,
@@ -367,9 +385,9 @@ int adc_val(){
 	return moisture;
 }
 ```
-This function returns values of moisture in range 0-100.
+This function sets color of leds depending on the values send from dev board.
 ```c
-void set_led(uint8_t *data_recive, const struct device *gpio1, const struct device *gpio2){
+void setLed(uint8_t *data_recive, const struct device *gpio1, const struct device *gpio2){
 	int ret;
 	int SetLed = atoi(data_recive);
 	if (SetLed == 1) {
@@ -390,34 +408,38 @@ void set_led(uint8_t *data_recive, const struct device *gpio1, const struct devi
 	} 
 }
 ```
-This function sets color of leds depending on the values send from dev board.
-## Finishing
-If you flashed your board with built programms you can check their logs.
+
+## Conclusion
+If you flashed your board with built programs you can check their logs.
 To see logs
 1. Open terminal
 2. Use command `sudo picocom --baud 115200 /dev/"your_usb_port"`
 ### On Wio E5 dev board kit logs should looks like this:
+
 ![Wio E5 dev board logs](./docs/asset/logs_dev_board.png)
-* Recive data informs us that data has been recived
+
+* Receivd data informs that data has been recieved
 * Recived data shows value of moisture
-* Sending data infroms us that data has been sended
-* Data send shows value that has been send: 1 means you need too water the plant and 0 means that your soil moisture is correct
-* Blinking led on board informs us that there is connection via uart.
+* Sending data informs that data has been sended
+* Data send shows value that has been send: 1 indicates a need for watering the plant, and 0 indicates that the soil moisture is correct.
+* Blinking led on board informs that there is connection via uart.
 ### On Wio E5 mini board logs should looks like this:
+
 ![Wio E5 dev board logs](./docs/asset/logs_mini_board.png)
-* Data send! infroms us that data has been sended
-* Recive data informs us that data has been recived
-* Recive data shows value sended from dev board: 1 means you need too water the plant and 0 means that your soil moisture is correct
+
+* Data send! infroms that data has been sended
+* Receive data informs that data has been received
+* Receive Data shows the value sent from the dev board: 1 indicates a need for watering the plant, and 0 indicates that the soil moisture is correct.
 * Send moisture data shows value of moisture
-* Blinking led on board informs us that there is connection via uart.
+* Blinking led on board informs that there is connection via uart.
 ## Use case
-If we have evertyhing already set, we have to put our soil moisture sensor in our plant:
+If evertyhing is already set, put soil moisture sensor in our plant:
 ![Sensor in plant](./docs/asset/sensor_in_plant.jpg)
-On our sensor there is a white straight line, wich shows how deep we have to put our sensor in soil.
+On the sensor there is a white straight line, wich shows how deep it should be puted in soil.
 ### Correct soil moisture
-If our soil moisture is correct so it means that soil moisture is higher than 30% and rgb led lights green:
+If soil moisture is correct so it means that soil moisture is higher than 30% and rgb led lights green:
 ![Green light](./docs/asset/green_light.jpg)
 ### Incorrect soil moisture
-If our soil moisture is not correct so it means that soil moisture is lower than 30% and rgb led lights red:
+If soil moisture is not correct so it means that soil moisture is lower than 30% and rgb led lights red:
 ![Red](./docs/asset/red_light.jpg)
 
