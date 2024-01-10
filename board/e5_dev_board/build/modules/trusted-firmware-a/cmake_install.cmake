@@ -1,4 +1,4 @@
-# Install script for directory: /home/cezary/zephyrproject/zephyr/modules/trusted-firmware-a
+# Install script for directory: /home/cezary/zephyr_project_cezary/zephyr/modules/trusted-firmware-a
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

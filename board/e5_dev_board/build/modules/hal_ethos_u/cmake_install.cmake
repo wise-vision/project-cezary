@@ -1,4 +1,4 @@
-# Install script for directory: /home/cezary/zephyrproject/zephyr/modules/hal_ethos_u
+# Install script for directory: /home/cezary/zephyr_project_cezary/zephyr/modules/hal_ethos_u
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

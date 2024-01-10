@@ -13,7 +13,7 @@
 set(SNIPPET_NAMES "cdc-acm-console" "xen_dom0")
 # The paths to all the snippet.yml files. One snippet
 # can have multiple snippet.yml files.
-set(SNIPPET_PATHS "/home/cezary/zephyrproject/zephyr/snippets/cdc-acm-console/snippet.yml" "/home/cezary/zephyrproject/zephyr/snippets/xen_dom0/snippet.yml")
+set(SNIPPET_PATHS "/home/cezary/zephyr_project_cezary/zephyr/snippets/cdc-acm-console/snippet.yml" "/home/cezary/zephyr_project_cezary/zephyr/snippets/xen_dom0/snippet.yml")
 
 # Create variable scope for snippets build variables
 zephyr_create_scope(snippets)

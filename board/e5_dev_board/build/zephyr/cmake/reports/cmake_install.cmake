@@ -1,4 +1,4 @@
-# Install script for directory: /home/cezary/zephyrproject/zephyr/cmake/reports
+# Install script for directory: /home/cezary/zephyr_project_cezary/zephyr/cmake/reports
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

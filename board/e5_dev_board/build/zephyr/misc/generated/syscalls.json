@@ -33,10 +33,10 @@
     ],
     [
         [
-            "int clock_gettime",
+            "int __posix_clock_get_base",
             "clockid_t clock_id, struct timespec *ts"
         ],
-        "time.h",
+        "posix_clock.h",
         true
     ],
     [
@@ -1066,7 +1066,7 @@
     [
         [
             "int k_pipe_put",
-            "struct k_pipe *pipe, void *data,\n\t\t\t size_t bytes_to_write, size_t *bytes_written,\n\t\t\t size_t min_xfer, k_timeout_t timeout"
+            "struct k_pipe *pipe, const void *data,\n\t\t\t size_t bytes_to_write, size_t *bytes_written,\n\t\t\t size_t min_xfer, k_timeout_t timeout"
         ],
         "kernel.h",
         true
@@ -1737,6 +1737,14 @@
     ],
     [
         [
+            "int charger_charge_enable",
+            "const struct device *dev, const bool enable"
+        ],
+        "charger.h",
+        false
+    ],
+    [
+        [
             "bool counter_is_counting_up",
             "const struct device *dev"
         ],
@@ -2147,6 +2155,14 @@
         [
             "int espi_saf_flash_erase",
             "const struct device *dev,\n\t\t\t\t   struct espi_saf_packet *pckt"
+        ],
+        "espi_saf.h",
+        false
+    ],
+    [
+        [
+            "int espi_saf_flash_unsuccess",
+            "const struct device *dev,\n\t\t\t\t       struct espi_saf_packet *pckt"
         ],
         "espi_saf.h",
         false

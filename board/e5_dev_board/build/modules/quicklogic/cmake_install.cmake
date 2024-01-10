@@ -1,4 +1,4 @@
-# Install script for directory: /home/cezary/zephyrproject/modules/hal/quicklogic
+# Install script for directory: /home/cezary/zephyr_project_cezary/modules/hal/quicklogic
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

@@ -1,4 +1,4 @@
-# Install script for directory: /home/cezary/zephyrproject/zephyr/drivers
+# Install script for directory: /home/cezary/zephyr_project_cezary/zephyr/drivers
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,22 +39,22 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/cezary/zephyrproject/project-cezary-1/board/e5_dev_board/build/zephyr/drivers/disk/cmake_install.cmake")
-  include("/home/cezary/zephyrproject/project-cezary-1/board/e5_dev_board/build/zephyr/drivers/interrupt_controller/cmake_install.cmake")
-  include("/home/cezary/zephyrproject/project-cezary-1/board/e5_dev_board/build/zephyr/drivers/misc/cmake_install.cmake")
-  include("/home/cezary/zephyrproject/project-cezary-1/board/e5_dev_board/build/zephyr/drivers/pcie/cmake_install.cmake")
-  include("/home/cezary/zephyrproject/project-cezary-1/board/e5_dev_board/build/zephyr/drivers/usb/cmake_install.cmake")
-  include("/home/cezary/zephyrproject/project-cezary-1/board/e5_dev_board/build/zephyr/drivers/usb_c/cmake_install.cmake")
-  include("/home/cezary/zephyrproject/project-cezary-1/board/e5_dev_board/build/zephyr/drivers/clock_control/cmake_install.cmake")
-  include("/home/cezary/zephyrproject/project-cezary-1/board/e5_dev_board/build/zephyr/drivers/console/cmake_install.cmake")
-  include("/home/cezary/zephyrproject/project-cezary-1/board/e5_dev_board/build/zephyr/drivers/gpio/cmake_install.cmake")
-  include("/home/cezary/zephyrproject/project-cezary-1/board/e5_dev_board/build/zephyr/drivers/lora/cmake_install.cmake")
-  include("/home/cezary/zephyrproject/project-cezary-1/board/e5_dev_board/build/zephyr/drivers/pinctrl/cmake_install.cmake")
-  include("/home/cezary/zephyrproject/project-cezary-1/board/e5_dev_board/build/zephyr/drivers/regulator/cmake_install.cmake")
-  include("/home/cezary/zephyrproject/project-cezary-1/board/e5_dev_board/build/zephyr/drivers/reset/cmake_install.cmake")
-  include("/home/cezary/zephyrproject/project-cezary-1/board/e5_dev_board/build/zephyr/drivers/serial/cmake_install.cmake")
-  include("/home/cezary/zephyrproject/project-cezary-1/board/e5_dev_board/build/zephyr/drivers/spi/cmake_install.cmake")
-  include("/home/cezary/zephyrproject/project-cezary-1/board/e5_dev_board/build/zephyr/drivers/timer/cmake_install.cmake")
+  include("/home/cezary/zephyr_project_cezary/project-cezary/board/e5_dev_board/build/zephyr/drivers/disk/cmake_install.cmake")
+  include("/home/cezary/zephyr_project_cezary/project-cezary/board/e5_dev_board/build/zephyr/drivers/interrupt_controller/cmake_install.cmake")
+  include("/home/cezary/zephyr_project_cezary/project-cezary/board/e5_dev_board/build/zephyr/drivers/misc/cmake_install.cmake")
+  include("/home/cezary/zephyr_project_cezary/project-cezary/board/e5_dev_board/build/zephyr/drivers/pcie/cmake_install.cmake")
+  include("/home/cezary/zephyr_project_cezary/project-cezary/board/e5_dev_board/build/zephyr/drivers/usb/cmake_install.cmake")
+  include("/home/cezary/zephyr_project_cezary/project-cezary/board/e5_dev_board/build/zephyr/drivers/usb_c/cmake_install.cmake")
+  include("/home/cezary/zephyr_project_cezary/project-cezary/board/e5_dev_board/build/zephyr/drivers/clock_control/cmake_install.cmake")
+  include("/home/cezary/zephyr_project_cezary/project-cezary/board/e5_dev_board/build/zephyr/drivers/console/cmake_install.cmake")
+  include("/home/cezary/zephyr_project_cezary/project-cezary/board/e5_dev_board/build/zephyr/drivers/gpio/cmake_install.cmake")
+  include("/home/cezary/zephyr_project_cezary/project-cezary/board/e5_dev_board/build/zephyr/drivers/lora/cmake_install.cmake")
+  include("/home/cezary/zephyr_project_cezary/project-cezary/board/e5_dev_board/build/zephyr/drivers/pinctrl/cmake_install.cmake")
+  include("/home/cezary/zephyr_project_cezary/project-cezary/board/e5_dev_board/build/zephyr/drivers/regulator/cmake_install.cmake")
+  include("/home/cezary/zephyr_project_cezary/project-cezary/board/e5_dev_board/build/zephyr/drivers/reset/cmake_install.cmake")
+  include("/home/cezary/zephyr_project_cezary/project-cezary/board/e5_dev_board/build/zephyr/drivers/serial/cmake_install.cmake")
+  include("/home/cezary/zephyr_project_cezary/project-cezary/board/e5_dev_board/build/zephyr/drivers/spi/cmake_install.cmake")
+  include("/home/cezary/zephyr_project_cezary/project-cezary/board/e5_dev_board/build/zephyr/drivers/timer/cmake_install.cmake")
 
 endif()
 

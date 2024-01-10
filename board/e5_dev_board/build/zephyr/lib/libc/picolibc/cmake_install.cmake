@@ -1,4 +1,4 @@
-# Install script for directory: /home/cezary/zephyrproject/zephyr/lib/libc/picolibc
+# Install script for directory: /home/cezary/zephyr_project_cezary/zephyr/lib/libc/picolibc
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

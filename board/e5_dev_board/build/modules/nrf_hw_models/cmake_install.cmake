@@ -1,4 +1,4 @@
-# Install script for directory: /home/cezary/zephyrproject/modules/bsim_hw_models/nrf_hw_models
+# Install script for directory: /home/cezary/zephyr_project_cezary/modules/bsim_hw_models/nrf_hw_models
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

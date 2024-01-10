@@ -1,4 +1,4 @@
-# Install script for directory: /home/cezary/zephyrproject/zephyr/drivers/regulator
+# Install script for directory: /home/cezary/zephyr_project_cezary/zephyr/drivers/regulator
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

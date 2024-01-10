@@ -1,4 +1,4 @@
-# Install script for directory: /home/cezary/zephyrproject/zephyr/soc/arm/st_stm32/stm32wl
+# Install script for directory: /home/cezary/zephyr_project_cezary/zephyr/soc/arm/st_stm32/stm32wl
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

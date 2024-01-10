@@ -1,4 +1,4 @@
-# Install script for directory: /home/cezary/zephyrproject/modules/hal/altera
+# Install script for directory: /home/cezary/zephyr_project_cezary/modules/hal/altera
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

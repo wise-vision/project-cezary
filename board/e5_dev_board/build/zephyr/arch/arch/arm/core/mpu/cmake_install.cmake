@@ -1,4 +1,4 @@
-# Install script for directory: /home/cezary/zephyrproject/zephyr/arch/arm/core/mpu
+# Install script for directory: /home/cezary/zephyr_project_cezary/zephyr/arch/arm/core/mpu
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

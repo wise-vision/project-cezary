@@ -1,4 +1,4 @@
-# Install script for directory: /home/cezary/zephyrproject/zephyr/modules/hal_gigadevice
+# Install script for directory: /home/cezary/zephyr_project_cezary/zephyr/modules/hal_gigadevice
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

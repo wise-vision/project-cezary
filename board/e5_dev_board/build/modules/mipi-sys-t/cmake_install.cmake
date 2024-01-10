@@ -1,4 +1,4 @@
-# Install script for directory: /home/cezary/zephyrproject/modules/debug/mipi-sys-t
+# Install script for directory: /home/cezary/zephyr_project_cezary/modules/debug/mipi-sys-t
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

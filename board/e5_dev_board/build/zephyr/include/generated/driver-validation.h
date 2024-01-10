@@ -22,6 +22,8 @@
 
 #define K_SYSCALL_DRIVER_CAN(ptr, op) K_SYSCALL_DRIVER_GEN(ptr, op, can, CAN)
 
+#define K_SYSCALL_DRIVER_CELLULAR(ptr, op) K_SYSCALL_DRIVER_GEN(ptr, op, cellular, CELLULAR)
+
 #define K_SYSCALL_DRIVER_CHARGER(ptr, op) K_SYSCALL_DRIVER_GEN(ptr, op, charger, CHARGER)
 
 #define K_SYSCALL_DRIVER_COREDUMP(ptr, op) K_SYSCALL_DRIVER_GEN(ptr, op, coredump, COREDUMP)

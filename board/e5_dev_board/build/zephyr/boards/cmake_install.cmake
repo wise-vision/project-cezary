@@ -1,4 +1,4 @@
-# Install script for directory: /home/cezary/zephyrproject/zephyr/boards
+# Install script for directory: /home/cezary/zephyr_project_cezary/zephyr/boards
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

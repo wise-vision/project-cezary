@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #define DEFAULT_RADIO_NODE DT_ALIAS(lora0)
 BUILD_ASSERT(DT_NODE_HAS_STATUS(DEFAULT_RADIO_NODE, okay),
-	     "No default LoRa radio specified in DT");
+			 "No default LoRa radio specified in DT");
 
 #define MAX_DATA_LEN 255
 
@@ -34,7 +34,8 @@ int configureRx(const struct device *const lora_dev)
 	config.tx = false;
 
 	int ret = lora_config(lora_dev, &config);
-	if (ret < 0) {
+	if (ret < 0)
+	{
 		LOG_ERR("LoRa config failed");
 	}
 	return ret;
@@ -55,18 +56,21 @@ int configureTx(const struct device *const lora_dev)
 	config.tx = true;
 
 	int ret = lora_config(lora_dev, &config);
-	if (ret < 0) {
+	if (ret < 0)
+	{
 		LOG_ERR("LoRa config failed");
 	}
 	return ret;
 }
 
-void recevMsg(const struct device *dev, uint8_t *data, int16_t rssi, int8_t snr){
+void recevMsg(const struct device *dev, uint8_t *data, int16_t rssi, int8_t snr)
+{
 	int len;
 	configureRx(dev);
 	LOG_INF("Recive data");
 	len = lora_recv(dev, data, MAX_DATA_LEN, K_FOREVER, &rssi, &snr);
-	if (len < 0) {
+	if (len < 0)
+	{
 		LOG_ERR("LoRa receive failed");
 		return 0;
 	}
@@ -74,26 +78,30 @@ void recevMsg(const struct device *dev, uint8_t *data, int16_t rssi, int8_t snr)
 	LOG_INF("Received data: %s (RSSI:%ddBm, SNR:%ddBm)", data, rssi, snr);
 }
 
-void sendMsg(const struct device *dev, uint8_t *data, int16_t rssi, int8_t snr){
+void sendMsg(const struct device *dev, uint8_t *data, int16_t rssi, int8_t snr)
+{
 	char data_send[MAX_DATA_LEN] = {0};
 	int ret;
 	LOG_INF("Sending data");
 	int converted_value = atoi(data);
-	if (converted_value<30){
-	data_send[0]='1';
-	}else if (converted_value>80){
-	data_send[0]='2';
-	}else{
-	data_send[0]='0';
+	if (converted_value < 30)
+	{
+		data_send[0] = '1';
+	}
+	else
+	{
+		data_send[0] = '0';
 	}
 	configureTx(dev);
-	ret=lora_send(dev,data_send,1);
-	if (ret < 0) {
+	ret = lora_send(dev, data_send, 1);
+	if (ret < 0)
+	{
 		LOG_ERR("LoRa send failed");
-	}else{
-		LOG_INF("Data send:%s",data_send);
 	}
-
+	else
+	{
+		LOG_INF("Data send:%s", data_send);
+	}
 }
 
 int main(void)
@@ -103,11 +111,13 @@ int main(void)
 	int16_t rssi;
 	int8_t snr;
 
-	if (!device_is_ready(lora_dev)) {
+	if (!device_is_ready(lora_dev))
+	{
 		LOG_ERR("%s Device not ready", lora_dev->name);
 		return 0;
 	}
-	while(1){
+	while (1)
+	{
 		recevMsg(lora_dev, data, rssi, snr);
 		sendMsg(lora_dev, data, rssi, snr);
 		k_sleep(K_MSEC(1000));

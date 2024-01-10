@@ -110,7 +110,7 @@
 				#gpio-cells = < 0x2 >;
 				reg = < 0x48000400 0x400 >;
 				clocks = < &rcc 0x4c 0x2 >;
-				phandle = < 0x17 >;
+				phandle = < 0x1a >;
 			};
 			gpioc: gpio@48000800 {
 				compatible = "st,stm32-gpio";
@@ -191,7 +191,7 @@
 				phandle = < 0x7 >;
 			};
 		};
-		lptim1: timers@40007c00 {
+		lptim1: stm32_lp_tick_source: timers@40007c00 {
 			compatible = "st,stm32-lptim";
 			clocks = < &rcc 0x58 0x80000000 >, < &rcc 0x3 0x17288 >;
 			#address-cells = < 0x1 >;
@@ -270,6 +270,7 @@
 			interrupts = < 0x1e 0x0 >, < 0x1f 0x0 >;
 			interrupt-names = "event", "error";
 			status = "disabled";
+			phandle = < 0x17 >;
 		};
 		i2c2: grove_i2c: i2c@40005800 {
 			compatible = "st,stm32-i2c-v2";
@@ -283,6 +284,7 @@
 			status = "okay";
 			pinctrl-0 = < &i2c2_scl_pb15 &i2c2_sda_pa15 >;
 			pinctrl-names = "default";
+			phandle = < 0x18 >;
 		};
 		i2c3: i2c@40005c00 {
 			compatible = "st,stm32-i2c-v2";
@@ -294,6 +296,7 @@
 			interrupts = < 0x30 0x0 >, < 0x31 0x0 >;
 			interrupt-names = "event", "error";
 			status = "disabled";
+			phandle = < 0x19 >;
 		};
 		spi1: spi@40013000 {
 			compatible = "st,stm32-spi-fifo", "st,stm32-spi";
@@ -580,6 +583,27 @@
 		compatible = "st,stm32-vbat";
 		ratio = < 0x3 >;
 		io-channels = < &adc1 0xe >;
+		status = "disabled";
+	};
+	smbus1: smbus1 {
+		compatible = "st,stm32-smbus";
+		#address-cells = < 0x1 >;
+		#size-cells = < 0x0 >;
+		i2c = < &i2c1 >;
+		status = "disabled";
+	};
+	smbus2: smbus2 {
+		compatible = "st,stm32-smbus";
+		#address-cells = < 0x1 >;
+		#size-cells = < 0x0 >;
+		i2c = < &i2c2 >;
+		status = "disabled";
+	};
+	smbus3: smbus3 {
+		compatible = "st,stm32-smbus";
+		#address-cells = < 0x1 >;
+		#size-cells = < 0x0 >;
+		i2c = < &i2c3 >;
 		status = "disabled";
 	};
 	leds {

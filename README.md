@@ -15,8 +15,8 @@ Soil moisture system includes:
 
 ## Technologies
 Project is created with:
-* Zephyr: 3.5.0
-* West: 1.2.0
+* Zephyr: 3.5.99
+* Zephyr-SDK: 0.16.4
 
 ## Prerequisites
 1. It is necessary to have Zephyr already installed to build or flash application.

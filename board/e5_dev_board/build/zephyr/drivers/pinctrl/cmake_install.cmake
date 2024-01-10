@@ -1,4 +1,4 @@
-# Install script for directory: /home/cezary/zephyrproject/zephyr/drivers/pinctrl
+# Install script for directory: /home/cezary/zephyr_project_cezary/zephyr/drivers/pinctrl
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

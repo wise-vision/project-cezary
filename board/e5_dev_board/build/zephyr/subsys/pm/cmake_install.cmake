@@ -1,4 +1,4 @@
-# Install script for directory: /home/cezary/zephyrproject/zephyr/subsys/pm
+# Install script for directory: /home/cezary/zephyr_project_cezary/zephyr/subsys/pm
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

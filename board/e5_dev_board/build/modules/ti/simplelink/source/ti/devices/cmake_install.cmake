@@ -1,4 +1,4 @@
-# Install script for directory: /home/cezary/zephyrproject/modules/hal/ti/simplelink/source/ti/devices
+# Install script for directory: /home/cezary/zephyr_project_cezary/modules/hal/ti/simplelink/source/ti/devices
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

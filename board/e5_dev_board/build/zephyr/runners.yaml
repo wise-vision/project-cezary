@@ -14,7 +14,7 @@ debug-runner: pyocd
 
 # Common runner configuration values.
 config:
-  board_dir: /home/cezary/zephyrproject/zephyr/boards/arm/lora_e5_dev_board
+  board_dir: /home/cezary/zephyr_project_cezary/zephyr/boards/arm/lora_e5_dev_board
   # Build outputs:
   elf_file: zephyr.elf
   hex_file: zephyr.hex

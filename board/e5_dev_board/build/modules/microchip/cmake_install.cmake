@@ -1,4 +1,4 @@
-# Install script for directory: /home/cezary/zephyrproject/modules/hal/microchip
+# Install script for directory: /home/cezary/zephyr_project_cezary/modules/hal/microchip
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

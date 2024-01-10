@@ -1,4 +1,4 @@
-# Install script for directory: /home/cezary/zephyrproject/modules/hal/stm32/stm32cube/stm32wlxx
+# Install script for directory: /home/cezary/zephyr_project_cezary/modules/hal/stm32/stm32cube/stm32wlxx
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

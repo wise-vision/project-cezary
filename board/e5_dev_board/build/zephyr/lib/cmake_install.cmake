@@ -1,4 +1,4 @@
-# Install script for directory: /home/cezary/zephyrproject/zephyr/lib
+# Install script for directory: /home/cezary/zephyr_project_cezary/zephyr/lib
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,11 +39,14 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/cezary/zephyrproject/project-cezary-1/board/e5_dev_board/build/zephyr/lib/crc/cmake_install.cmake")
-  include("/home/cezary/zephyrproject/project-cezary-1/board/e5_dev_board/build/zephyr/lib/libc/cmake_install.cmake")
-  include("/home/cezary/zephyrproject/project-cezary-1/board/e5_dev_board/build/zephyr/lib/posix/cmake_install.cmake")
-  include("/home/cezary/zephyrproject/project-cezary-1/board/e5_dev_board/build/zephyr/lib/hash/cmake_install.cmake")
-  include("/home/cezary/zephyrproject/project-cezary-1/board/e5_dev_board/build/zephyr/lib/os/cmake_install.cmake")
+  include("/home/cezary/zephyr_project_cezary/project-cezary/board/e5_dev_board/build/zephyr/lib/crc/cmake_install.cmake")
+  include("/home/cezary/zephyr_project_cezary/project-cezary/board/e5_dev_board/build/zephyr/lib/libc/cmake_install.cmake")
+  include("/home/cezary/zephyr_project_cezary/project-cezary/board/e5_dev_board/build/zephyr/lib/posix/cmake_install.cmake")
+  include("/home/cezary/zephyr_project_cezary/project-cezary/board/e5_dev_board/build/zephyr/lib/hash/cmake_install.cmake")
+  include("/home/cezary/zephyr_project_cezary/project-cezary/board/e5_dev_board/build/zephyr/lib/heap/cmake_install.cmake")
+  include("/home/cezary/zephyr_project_cezary/project-cezary/board/e5_dev_board/build/zephyr/lib/mem_blocks/cmake_install.cmake")
+  include("/home/cezary/zephyr_project_cezary/project-cezary/board/e5_dev_board/build/zephyr/lib/os/cmake_install.cmake")
+  include("/home/cezary/zephyr_project_cezary/project-cezary/board/e5_dev_board/build/zephyr/lib/utils/cmake_install.cmake")
 
 endif()
 

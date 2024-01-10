@@ -1,4 +1,4 @@
-# Install script for directory: /home/cezary/zephyrproject/zephyr/arch/arm
+# Install script for directory: /home/cezary/zephyr_project_cezary/zephyr/arch/arm
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/cezary/zephyrproject/project-cezary-1/board/e5_dev_board/build/zephyr/arch/arch/arm/core/cmake_install.cmake")
+  include("/home/cezary/zephyr_project_cezary/project-cezary/board/e5_dev_board/build/zephyr/arch/arch/arm/core/cmake_install.cmake")
 
 endif()
 

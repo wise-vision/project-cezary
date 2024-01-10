@@ -1,4 +1,4 @@
-# Install script for directory: /home/cezary/zephyrproject/zephyr/drivers/reset
+# Install script for directory: /home/cezary/zephyr_project_cezary/zephyr/drivers/reset
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
