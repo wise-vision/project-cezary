@@ -1,1 +1,0 @@
-"mcuboot":"/home/cezary/zephyr_project_cezary/bootloader/mcuboot":"/home/cezary/zephyr_project_cezary/bootloader/mcuboot/boot/zephyr/sysbuild"
