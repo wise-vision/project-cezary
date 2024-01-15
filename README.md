@@ -39,7 +39,7 @@ To build version for the e5 dev board, you need an unlocked board, (this shows h
 1. Copy Source code from github into zephyrpoject directory:
 ```
 cd ~/zephyrpoject
-git clone https://github.com/wise-vision/project-cezary.git
+git clone -b zephyr-3.1.0 https://github.com/wise-vision/project-cezary.git
 ```
 2. Navigate to the build directory::
 ```
