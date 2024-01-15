@@ -38,12 +38,12 @@ sudo apt-get -y install picom
 To build version for the e5 dev board, you need an unlocked board, (this shows how to unlock board https://wisevision.tech/docs/LoRa/LoRa-e5-dev-board-unprotect-memory) connected via UART and st-link.
 1. Copy Source code from github into zephyrpoject directory:
 ```
-cd /zephyrpoject
+cd ~/zephyrpoject
 git clone https://github.com/wise-vision/project-cezary.git
 ```
 2. Navigate to the build directory::
 ```
-cd /zephyrpoject/project-cezary/boards/e5_dev_board
+cd ~/zephyrpoject/project-cezary/boards/e5_dev_board
 ```
 3. Build source code:
 ```
@@ -64,12 +64,12 @@ Flash is successful when all of the flasj jobs are finished.
 To build versions for the e5 mini board, you need an unlocked board(this shows how to unlock board https://wisevision.tech/docs/LoRa/LoRa-e5-dev-board-unprotect-memory), connected via UART and st-link.
 1. Copy Source code from github into zephyrpoject directory:
 ```
-cd /zephyrpoject
+cd ~/zephyrpoject
 git clone https://github.com/wise-vision/project-cezary.git
 ```
 2. Navigate to the build directory::
 ```
-cd /zephyrpoject/project-cezary/boards/e5_mini
+cd ~/zephyrpoject/project-cezary/boards/e5_mini
 ```
 3. Build source code:
 ```
