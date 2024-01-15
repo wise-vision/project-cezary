@@ -15,8 +15,8 @@ Soil moisture system includes:
 
 ## Technologies
 Project is created with:
-* Zephyr: 3.5.0
-* West: 1.2.0
+* Zephyr: 3.1.0
+* Zephyr SDK: 0.14.2
 
 ## Prerequisites
 1. It is necessary to have Zephyr already installed to build or flash application.
@@ -38,12 +38,12 @@ sudo apt-get -y install picom
 To build version for the e5 dev board, you need an unlocked board, (this shows how to unlock board https://wisevision.tech/docs/LoRa/LoRa-e5-dev-board-unprotect-memory) connected via UART and st-link.
 1. Copy Source code from github into zephyrpoject directory:
 ```
-cd /zephyrpoject
+cd ~/zephyrpoject
 git clone https://github.com/wise-vision/project-cezary.git
 ```
 2. Navigate to the build directory::
 ```
-cd /zephyrpoject/project-cezary/boards/e5_dev_board
+cd ~/zephyrpoject/project-cezary/boards/e5_dev_board
 ```
 3. Build source code:
 ```
@@ -64,12 +64,12 @@ Flash is successful when all of the flasj jobs are finished.
 To build versions for the e5 mini board, you need an unlocked board(this shows how to unlock board https://wisevision.tech/docs/LoRa/LoRa-e5-dev-board-unprotect-memory), connected via UART and st-link.
 1. Copy Source code from github into zephyrpoject directory:
 ```
-cd /zephyrpoject
+cd ~/zephyrpoject
 git clone https://github.com/wise-vision/project-cezary.git
 ```
 2. Navigate to the build directory::
 ```
-cd /zephyrpoject/project-cezary/boards/e5_mini
+cd ~/zephyrpoject/project-cezary/boards/e5_mini
 ```
 3. Build source code:
 ```
@@ -97,6 +97,9 @@ CONFIG_SPI=y
 CONFIG_GPIO=y
 CONFIG_LORA=y
 CONFIG_CBPRINTF_FP_SUPPORT=y
+
+# Zephyr v3.1
+CONFIG_LORA_SX12XX=y
 ```
 ### src/main.c
 This function is for configuarting reception.
@@ -109,8 +112,6 @@ int configureRx(const struct device *const lora_dev)
 	config.datarate = SF_10;
 	config.preamble_len = 8;
 	config.coding_rate = CR_4_5;
-	config.iq_inverted = false;
-	config.public_network = false;
 	config.tx_power = 14;
 	config.tx = false;
 
@@ -143,8 +144,6 @@ int configureTx(const struct device *const lora_dev)
 	config.datarate = SF_10;
 	config.preamble_len = 8;
 	config.coding_rate = CR_4_5;
-	config.iq_inverted = false;
-	config.public_network = false;
 	config.tx_power = 4;
 	config.tx = true;
 
@@ -257,6 +256,9 @@ CONFIG_LOG=y
 CONFIG_SPI=y
 CONFIG_GPIO=y
 CONFIG_LORA=y
+
+# Zephyr v3.1
+CONFIG_LORA_SX12XX=y
 ```
 ### src/main.c
 `configureRx and configureTx`
@@ -408,7 +410,26 @@ void setLed(uint8_t *data_recive, const struct device *gpio1, const struct devic
 	} 
 }
 ```
-
+## Zephyr 3.1.0 version changes 
+### prj.conf
+Additional lora configuration for this version of zephyr
+```
+# Zephyr v3.1
+CONFIG_LORA_SX12XX=y
+```
+### configureRx and configureTx in src/main.c
+Removed config things, which this verison of zephyr doesn't have for lora drive
+```c
+	config.iq_inverted = false;
+	config.public_network = false;
+```
+### src/main.c for e5_dev_board
+Changed value of `MAX_DATA_LEN` from 255 to 10, because it's caused errors in sending data 
+```c
+#define MAX_DATA_LEN 10
+```
+### src/adc_zephyr_v_3_5.h for e5_mini
+New file, which has function from zephyr 3.5.0, which zephyr 3.1.0 doesn,t have for adc driver. It's coppied from zephyr 3.5.0.
 ## Conclusion
 If you flashed your board with built programs you can check their logs.
 To see logs

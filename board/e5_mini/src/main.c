@@ -13,7 +13,7 @@
 #include <zephyr/kernel.h>
 #include <zephyr/drivers/adc.h>
 #include <zephyr/drivers/gpio.h>
-#include <app_version.h>
+#include "adc_zephyr_v_3_5.h"
 
 //adc
 #if !DT_NODE_EXISTS(DT_PATH(zephyr_user)) || \
@@ -64,8 +64,6 @@ int configureRx(const struct device *const lora_dev)
 	config.datarate = SF_10;
 	config.preamble_len = 8;
 	config.coding_rate = CR_4_5;
-	config.iq_inverted = false;
-	config.public_network = false;
 	config.tx_power = 14;
 	config.tx = false;
 
@@ -85,8 +83,6 @@ int configureTx(const struct device *const lora_dev)
 	config.datarate = SF_10;
 	config.preamble_len = 8;
 	config.coding_rate = CR_4_5;
-	config.iq_inverted = false;
-	config.public_network = false;
 	config.tx_power = 4;
 	config.tx = true;
 
@@ -196,14 +192,14 @@ int adcVal(){
 }
 
 void setLeds(uint8_t *data_recive, const struct device *gpio1, const struct device *gpio2){
-	int ret;
+	int ret=0;
 	int SetLed = atoi(data_recive);
 	if (SetLed == 1) {
 		ret = gpio_pin_set_raw(gpio2, 10, 0);
 		ret = gpio_pin_set_raw(gpio1, 0, 1);	
 			
 	} else {
-		ret = gpio_pin_configure(gpio1, 5,GPIO_OUTPUT_ACTIVE); //red
+		ret = gpio_pin_configure(gpio1, 0,GPIO_OUTPUT_ACTIVE); //red
 		if (ret != 0) {
 			return;
 		}
@@ -218,7 +214,7 @@ static const struct device *gpio_ct_dev_2 = DEVICE_DT_GET(DT_NODELABEL(gpiob));
 
 int main(void)
 {	
-	const struct device *const lora_dev = DEVICE_DT_GET(DEFAULT_RADIO_NODE);
+	const struct device *lora_dev = DEVICE_DT_GET(DEFAULT_RADIO_NODE);
 	int16_t rssi;
 	int8_t snr;
 	uint8_t data_recive[MAX_DATA_LEN] = {0};
@@ -236,7 +232,7 @@ int main(void)
 		sendMsg(lora_dev, adcVal());
 		recevMsg(lora_dev,data_recive, rssi, snr);
 		setLeds(data_recive, gpio_ct_dev,  gpio_ct_dev_2);
-
+		
 		k_sleep(K_MSEC(1000));
 	}
 	return 0;

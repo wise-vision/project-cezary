@@ -13,7 +13,7 @@
 BUILD_ASSERT(DT_NODE_HAS_STATUS(DEFAULT_RADIO_NODE, okay),
 	     "No default LoRa radio specified in DT");
 
-#define MAX_DATA_LEN 255
+#define MAX_DATA_LEN 10
 
 #define LOG_LEVEL CONFIG_LOG_DEFAULT_LEVEL
 #include <zephyr/logging/log.h>
@@ -28,8 +28,6 @@ int configureRx(const struct device *const lora_dev)
 	config.datarate = SF_10;
 	config.preamble_len = 8;
 	config.coding_rate = CR_4_5;
-	config.iq_inverted = false;
-	config.public_network = false;
 	config.tx_power = 14;
 	config.tx = false;
 
@@ -49,8 +47,6 @@ int configureTx(const struct device *const lora_dev)
 	config.datarate = SF_10;
 	config.preamble_len = 8;
 	config.coding_rate = CR_4_5;
-	config.iq_inverted = false;
-	config.public_network = false;
 	config.tx_power = 14;
 	config.tx = true;
 
@@ -81,8 +77,6 @@ void sendMsg(const struct device *dev, uint8_t *data, int16_t rssi, int8_t snr){
 	int converted_value = atoi(data);
 	if (converted_value<30){
 	data_send[0]='1';
-	}else if (converted_value>80){
-	data_send[0]='2';
 	}else{
 	data_send[0]='0';
 	}
@@ -98,7 +92,7 @@ void sendMsg(const struct device *dev, uint8_t *data, int16_t rssi, int8_t snr){
 
 int main(void)
 {
-	const struct device *const lora_dev = DEVICE_DT_GET(DEFAULT_RADIO_NODE);
+	const struct device *lora_dev = DEVICE_DT_GET(DEFAULT_RADIO_NODE);
 	uint8_t data[MAX_DATA_LEN] = {0};
 	int16_t rssi;
 	int8_t snr;
